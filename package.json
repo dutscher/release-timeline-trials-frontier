@@ -8,12 +8,16 @@
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-svelte": "^5.0.3",
     "rollup-plugin-terser": "^5.1.2",
-    "svelte": "^3.0.0"
+    "rollup-plugin-copy": "^3.1.0",
+    "svelte": "^3.0.0",
+    "node-sass": "^4.13.0",
+    "svelte-preprocess": "^3.2.6"
   },
   "dependencies": {
     "sirv-cli": "^0.4.4"
   },
   "scripts": {
+    "npm:install": "npm install",
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "start": "sirv public"

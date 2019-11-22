@@ -18,6 +18,7 @@
             "date": "17.10.2019",
             "notes": "Ride your bike and master the tracks of Trials Frontier.\nThe Trials series is one of the most popular racing videogame series and its now available for mobile! Over 60 million players are trying to conquer these tracks. Will you enter the competition?",
             "forum": "https://forums.ubisoft.com/showthread.php/2146517-New-Update-Halloween-Heat!",
+            "icon": "https://i.imgur.com/2msZ6mJ.jpg",
             "event": {
                 "name": "Halloween Heat",
                 "type": "hunt",
@@ -36,6 +37,7 @@
             "date": "11.09.2019",
             "notes": "Fire up your engines, it's time for ‘Crash & Sunburn’! join the all-new event and fly high with the Superman stunt all over again! Get stuntin' to gain Fan Points and unlock 7 new Tracks, 2 New Paintjobs, and the brand new ‘Jungle Explorer’ outfit!",
             "forum": "https://forums.ubisoft.com/showthread.php/2125538-New-Update-Crash-amp-Sunburn!",
+            "icon": "https://i.imgur.com/J0RKKxr.jpg",
             "event": {
                 "name": "Crash & Sunburn",
                 "type": "fanpoints",
@@ -49,16 +51,19 @@
         },
         "7.3.0": {
             "date": "20.08.2019",
-            "fixfor": "7.2.2"
+            "fixfor": "7.2.2",
+            "icon": "https://i.imgur.com/alCfrYM.jpg"
         },
         "7.2.2": {
             "date": "31.07.2019",
+            "icon": "https://i.imgur.com/IJz4Odf.jpg",
             "fixfor": "7.2.0"
         },
         "7.2.0": {
             "date": "15.07.2019",
             "notes": "Riders, it's time for Giant Leaps in an all-new environment! Defy gravity with the brand new 'Moon Rover' Bike and deliver 'Helium-3 Ores' to the Research Lab! Avoid bumpy rides, make your way to the top of the Leaderboards, and win 6 epic new Tracks! Download Now!",
             "forum": "https://forums.ubisoft.com/showthread.php/2088777-Giant-Leaps!",
+            "icon": "https://i.imgur.com/IJz4Odf.jpg",
             "event": {
                 "name": "Giant Leaps!",
                 "type": "grind",
@@ -72,13 +77,15 @@
         },
         "7.1.0": {
             "date": "24.05.2019",
-            "fixfor": "7.0.0"
+            "fixfor": "7.0.0",
+            "icon": "https://i.imgur.com/n7aT5v6.jpg"
         },
         "7.0.0": {
             "date": "24.04.2019",
             "notes": "Welcome to the Harley-Davidson Rally! Introducing the mighty Harley-Davidson XG750R in Trials Frontier! Experience maximum torque as you race this beast through 50 Tracks! Go full-throttle and set your best times to dominate the Leaderboard! Rewards include blueprints to the Harley-Davidson XG750R and exciting new tracks!\nDon't miss out on the Harley-Davidson Asphalt Feeder outfit and the Orange Flicker Paintjob, as you Ride this Mean Machine! Download Now!",
             "forum": "https://forums.ubisoft.com/showthread.php/2045513-Harley-Davidson-Rally!",
             "youtube": "https://www.youtube.com/watch?v=5iMLI0A1Ti4",
+            "icon": "https://i.imgur.com/2Ps2wtQ.jpg",
             "event": {
                 "name": "Harley-Davidson Rally",
                 "type": "rally",
@@ -94,6 +101,7 @@
             "date": "13.03.2019",
             "notes": "Meet Orbie the friendly intergalactic explorer on a mission to get back home! Time for some intergalactic favors collect Energy Cores hidden across the Frontier and help repair Orbie's Spaceship! Join 'Orbie's Quest' to win all-new Tracks, exciting outfits and Paintjobs! Download now!",
             "forum": "https://forums.ubisoft.com/showthread.php/2013404-New-Update-Orbie-s-Quest!",
+            "icon": "https://i.imgur.com/wjy3uIt.jpg",
             "event": {
                 "name": "Orbie's Quest",
                 "type": "grind",
@@ -117,6 +125,7 @@
             "notes": "It’s time for the Trials Holiday Run! Get into the festive spirit with Bad Bone Sr., and keep winning epic rewards throughout! Ride different bikes in each Leg, including the BMW F 800 GS and the KTM 500-EXC! Get ready to break all records in this joyful Run! Download now!",
             "forum": "https://forums.ubisoft.com/showthread.php/1978700-Trials-Holiday-Run!",
             "youtube": "https://www.youtube.com/watch?v=eTRSnib6eSQ",
+            "icon": "https://i.imgur.com/YcTjL1l.jpg",
             "event": {
                 "name": "Trials Holiday Run!",
                 "type": "rally",
@@ -129,16 +138,19 @@
         },
         "6.5.0": {
             "date": "15.11.2018",
-            "fixfor": "6.4.1"
+            "fixfor": "6.4.1",
+            "icon": "https://i.imgur.com/j6h9l8m.jpg"
         },
         "6.4.1": {
             "date": "31.10.2018",
-            "fixfor": "6.4.0"
+            "fixfor": "6.4.0",
+            "icon": "https://i.imgur.com/j6h9l8m.jpg"
         },
         "6.4.0": {
             "date": "21.10.2018",
             "notes": "The Frontier is Haunted! The mysterious Dracuul has appeared out of thin air, looking for his missing Pumpkins! Help him find his freaky fruits, and win exciting new Tracks! Download Now!",
             "forum": "https://forums.ubisoft.com/showthread.php/1948794-New-Update-THE-HALLOWEEN-HUNT!",
+            "icon": "https://i.imgur.com/j6h9l8m.jpg",
             "event": {
                 "name": "The Halloween Hunt",
                 "type": "hunt",
@@ -152,7 +164,8 @@
         },
         "6.3.0": {
             "date": "26.09.2018",
-            "fixfor": "6.2.2"
+            "fixfor": "6.2.2",
+            "icon": "https://i.imgur.com/Dodc5e9.jpg"
         },
         "6.2.2": {
             "date": "02.09.2018",

@@ -1,0 +1,73 @@
+$color-white: #fff;
+$color-red: #ff6464;
+$color-dark-grey: #333333;
+
+$base-size: 8px;
+$base-size--double: $base-size * 2; // 16
+$base-size--three: $base-size * 3; // 24
+$base-size--four: $base-size * 4; // 32
+$base-size--five: $base-size * 5; // 40
+
+$font-family: 'Moderat', 'Arial', 'sans-serif';
+$base-font-size: 16px;
+$modular-scale-ratio: 1.2;
+
+// https://www.modularscale.com/?16&px&1.2
+// fs(4) => 33.178px
+// fs(3) => 27.648px
+// fs(2) => 23.04px
+// fs(1) => 19,2px
+// fs(0) => 16px
+// fs(-1) => 13.333px
+// fs(-2) => 11.111px
+//fs(-3) => 9.259px
+@function font-sizes($increment) {
+  $ratio: $modular-scale-ratio;
+  $v1: nth($base-font-size, 1);
+  $v2: nth($base-font-size, length($base-font-size));
+  $value: $v1;
+
+  @while $v2>$v1 {
+    $v2: ($v2 / $ratio);
+  }
+
+  @while $v2 < $v1 {
+    $v2: ($v2 * $ratio);
+  }
+
+  $double-stranded: $v2>$v1;
+
+  @if $increment>0 {
+    @for $i from 1 through $increment {
+      @if $double-stranded and ($v1 * $ratio) >$v2 {
+        $value: $v2;
+        $v2: ($v2 * $ratio);
+      } @else {
+        $v1: ($v1 * $ratio);
+        $value: $v1;
+      }
+    }
+  }
+
+  @if $increment < 0 {
+    @if $double-stranded {
+      $v2: ($v2 / $ratio);
+    }
+
+    @for $i from $increment through -1 {
+      @if $double-stranded and ($v1 / $ratio) < $v2 {
+        $value: $v2;
+        $v2: ($v2 / $ratio);
+      } @else {
+        $v1: ($v1 / $ratio);
+        $value: $v1;
+      }
+    }
+  }
+
+  @return $value;
+}
+
+@function fs($increment) {
+  @return font-sizes($increment);
+}

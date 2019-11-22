@@ -1,7 +1,10 @@
-import App from './App.svelte';
+import Releases from './releases/releases.svelte';
 
-var app = new App({
-	target: document.body
+var app = new Releases({
+	target: document.body,
+  props: {
+    answer: 42
+  },
 });
 
 export default app;
