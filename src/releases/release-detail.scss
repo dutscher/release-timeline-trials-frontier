@@ -1,0 +1,46 @@
+@import '../global';
+
+$cmp: '.release-detail';
+#{$cmp} {
+  max-width: 600px;
+  margin: 0 auto;
+
+  &__meta {
+    font-size: fs(0);
+    margin: $base-size;
+  }
+
+  &__notes {
+    font-size: fs(-1);
+  }
+
+  &__links {
+    margin: $base-size--double;
+    font-size: fs(0);
+    display: flex;
+    justify-content: center;
+
+    &:empty {
+      margin: 0;
+    }
+
+    a {
+      margin-right: $base-size;
+      display: inline-block;
+    }
+  }
+
+  &__img {
+    margin: $base-size--double;
+    padding-bottom: 0;
+
+    a {
+      display: inline-block
+    }
+
+    img {
+      width: 40px;
+      margin-right: $base-size--double;
+    }
+  }
+}

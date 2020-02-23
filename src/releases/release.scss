@@ -2,6 +2,7 @@
 
 $cmp: '.release';
 #{$cmp} {
+  color: $color-dark-grey;
   margin-right: $base-size--four;
   cursor: pointer;
   user-select: none;
@@ -9,37 +10,33 @@ $cmp: '.release';
 
   &:hover {
     color: $color-red;
-
-    #{$cmp}__dot {
-      &::before {
-        background-color: $color-red;
-      }
-    }
   }
 
   &__dot {
     height: $base-size--four;
 
-    &::before {
+    &__bubble {
       position: relative;
       content: '';
       display: inline-block;
       height: $base-size--four;
       width: $base-size--four;
-      background-color: $color-red;
+      background-color: $color-white;
       border-radius: 50%;
+      transform-origin: center;
       z-index: 1;
     }
-    
-    &::after {
+
+    &__stroke {
       content: '';
       position: absolute;
       left: $base-size--four;
       top: $base-size--four / 2;
       display: block;
-      width: 115%;
+      width: 0;
       height: 2px;
       background: $color-white;
+      //background: linear-gradient(90deg, $color-dark-grey 0%, $color-blue 100%);
     }
   }
 
@@ -55,6 +52,13 @@ $cmp: '.release';
     transform-origin: 32px 37px;
     font-size: fs(3);
     font-weight: bold;
+
+    &::after {
+      display: block;
+      width: 100px;
+      height: 2px;
+      background: #fff;
+    }
   }
 
   &__content {
@@ -66,38 +70,40 @@ $cmp: '.release';
     border-radius: $base-size--double;
     display: inline-block;
     box-shadow: 0 0 5px 0 rgba($color-dark-grey, 0.5);
+    width: 120px;
+    height: 120px;
   }
-  
+
   // modifier
   &--fixfor {
-    cursor: default;
     margin-right: 0;
+    color: $color-white;
 
     #{$cmp} {
       &__dot {
-        &::before {
-          background-color: $color-white;
+        &__bubble {
           top: $base-size;
           left: $base-size;
           height: $base-size--double;
           width: $base-size--double;
         }
 
-        &::after {
-          left: $base-size--double;
+        &__stroke {
+          left: $base-size;
         }
       }
 
       &__icon {
         width: 50px;
+        height: 50px;
       }
     }
+  }
 
-    &:hover {
-      color: inherit;
-
-      #{$cmp}__dot {
-        background-color: inherit;
+  &--is-first {
+    &#{$cmp} {
+      &--is-last {
+        margin-right: 0;
       }
     }
   }
@@ -105,10 +111,23 @@ $cmp: '.release';
   &--is-last {
     #{$cmp} {
       &__dot {
-        &::after {
+        &__stroke {
           display: none;
         }
       }
     }
   }
+
+  &--is-active {
+    color: $color-blue!important;
+  }
+
+  // cases of strokes
+  //&--fixfor {
+  //  + #{$cmp}--fixfor {
+  //    #{$cmp}__dot__stroke {
+  //      background: $color-white;
+  //    }
+  //  }
+  //}
 }

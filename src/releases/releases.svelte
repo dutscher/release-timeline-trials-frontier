@@ -1,78 +1,113 @@
 <style src="./releases.scss"></style>
 
 <script>
-	import { onMount, afterUpdate } from 'svelte';
-	import Release from './release.svelte';
+    import {onMount, afterUpdate} from 'svelte';
+    import Release from './release.svelte';
+    import ReleaseDetail from './release-detail.svelte';
 
-	const cmp = 'releases';
-	const nextPx = 150;
-	const today = new Date();
-	let autoscroll = true;
-	let slider;
-	let allReleases = [];
-	let visibileReleases = [];
-	let showReleases = 1;
-	let timeout = null;
+    const cmp = 'releases';
+    const today = new Date();
+    let autoscroll = true;
+    let slider;
+    let allReleases = [];
+    let visibileReleases = [];
+    let showReleases = 1;
+    let showNextReleaseInDetail = false;
+    let timeout = null;
+    let activeRelease = null;
+    // reactive
+    $: {
+        visibileReleases = allReleases.slice(0, showReleases);
+        if (showNextReleaseInDetail) {
+            setActive(visibileReleases[visibileReleases.length - 1], true);
+            showNextReleaseInDetail = false;
+        }
+    }
 
-	// lifecycle
+    // lifecycle
     onMount(async () => {
-        const res = await fetch(`/build/versions.json`);
+        const useLocal = false;
+        const localUrl = "//localhost:8001/dist/json/versions.json";
+        const distUrl = "https://trialstrackmap.sb-f.de/dist/json/versions.json";
+        const res = await fetch(useLocal ? localUrl : distUrl);
         const json = await res.json();
         allReleases = Object.entries(json.releases)
-        // remove empty where releaseVersion !== ''
-        .filter((_release) => _release[0] !== '')
-        // convert app into object
-        .map((_release) => {
-          const release = _release[1];
-          release.version = _release[0];
-          return release;
-        });
+                // remove empty where releaseVersion !== ''
+                .filter((_release) => _release[0] !== '')
+                // convert app into object
+                .map((_release) => {
+                    const release = _release[1];
+                    release.version = _release[0];
+                    return release;
+                });
+        setActive(allReleases[0]);
     });
 
     afterUpdate(() => {
-          if(autoscroll) {
-            if(timeout !== null){
+        if (autoscroll) {
+            if (timeout !== null) {
                 clearTimeout(timeout);
             }
             timeout = setTimeout(() => {
                 slider.scrollTo(slider.scrollWidth, 0);
             }, 50);
-          } else {
+        } else {
             autoscroll = true;
-          }
-        });
+        }
+    });
 
-	// reactive
-    $: visibileReleases = allReleases.slice(0, showReleases);
+    // actions
+    function showMore(showDetail) {
+        showReleases++;
+        if (showDetail) {
+            showNextReleaseInDetail = true;
+        }
+    }
 
-	// actions
-	function showMore() {
-      showReleases++;
+    function showAll() {
+        showReleases = allReleases.length;
     }
-	function showAll() {
-      showReleases = allReleases.length;
-    }
-    function scrollHorizontal(event){
+
+    function scrollHorizontal(event) {
+        const nextPx = 150;
+
         if (slider.doScroll) {
             slider.doScroll(event.wheelDelta > 0 ? 'left' : 'right');
         } else if ((event.wheelDelta || event.detail) > 0) {
-            slider.scrollLeft -= nextPx;
-        } else {
             slider.scrollLeft += nextPx;
             showMore();
+        } else {
+            slider.scrollLeft -= nextPx;
         }
 
         autoscroll = false;
         event.preventDefault();
     }
 
+    function setActive(release, doAutoscroll) {
+        activeRelease = release;
+        if (!doAutoscroll) {
+            autoscroll = false;
+        }
+    }
+
     // misc
-	function isLast(index){
-	  return index === visibileReleases.length - 1;
-	}
-	function hrDate(timestamp){
-	  return timestamp.toLocaleDateString();
-	}
+    function isFirst(index) {
+        return index === 0;
+    }
+
+    function isLast(index) {
+        return index === visibileReleases.length - 1;
+    }
+
+    function hrDate(timestamp) {
+        // 2.2.2020 -> 02.02.2020
+        return timestamp
+                .toLocaleDateString()
+                .split('.')
+                .map(number => number.padStart(2, '0'))
+                .join('.')
+    }
 </script>
 
 <div class={cmp} bind:this={slider} on:mousewheel={scrollHorizontal}>
@@ -81,22 +116,31 @@
         Today is the {hrDate(today)}
     </div>
     <div class="{cmp}__slider">
-    {#each visibileReleases as release, i (release.version)}
-        <Release
-            release={release}
-            isLast={isLast(i)} />
-    {:else}
-        <p>loading...</p>
-    {/each}
+        {#each visibileReleases as release, i (release.version)}
+            <Release
+                    setActive={setActive}
+                    release={release}
+                    isFirst={isFirst(i)}
+                    isLast={isLast(i)}
+                    activeRelease={activeRelease}/>
+        {:else}
+            <span class="loader spin"></span>
+        {/each}
 
-    {#if visibileReleases.length > 0 && showReleases < allReleases.length}
-        <div class="{cmp}__nav">
-            <button class="{cmp}__more-btn" on:click={showMore}>
-                >
-            </button><button class="{cmp}__more-btn" on:click={showAll}>
-                >|
-            </button>
-        </div>
-    {/if}
+        {#if visibileReleases.length > 0 && showReleases < allReleases.length}
+            <div class="{cmp}__nav">
+                <button class="{cmp}__more-btn" on:click={() => showMore(true)}>
+                    >
+                </button>
+                <button class="{cmp}__more-btn" on:click={showAll}>
+                    >|
+                </button>
+            </div>
+        {/if}
+    </div>
+    <div class="{cmp}__detail">
+        <ReleaseDetail
+                today={today}
+                release={activeRelease}/>
     </div>
 </div>
