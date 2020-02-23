@@ -16,7 +16,8 @@
     "typescript": "^3.7.5"
   },
   "dependencies": {
-    "sirv-cli": "^0.4.4"
+    "sirv-cli": "^0.4.4",
+    "serialize-javascript": ">=2.1.1"
   },
   "scripts": {
     "npm:install": "npm install",
