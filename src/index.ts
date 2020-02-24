@@ -1,5 +1,5 @@
-import Releases from './releases/releases.svelte';
+import Timeline from './releases/timeline.svelte';
 
-new Releases({
+new Timeline({
     target: document.body,
 });

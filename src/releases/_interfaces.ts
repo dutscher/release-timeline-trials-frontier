@@ -3,7 +3,6 @@ export interface Release {
     icon: string, // https://i.imgur.com/cZyTO28.png
     version: string, // release version in store 7.9.0
     fixfor?: string, // version fix of major
-    anniversary?: number // anniversary edition
     notes?: string, // Meet Orbie the friendly intergala...
     youtube?: string, // offical youtube video https://www.youtube.com/watch?v=-O6YYsvjk9w
     forum?: string, // https://forums.ubisoft.com/showthread.php/2013404-New-Update-Orbie-s-Quest!

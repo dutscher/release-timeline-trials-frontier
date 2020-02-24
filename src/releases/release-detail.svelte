@@ -3,8 +3,10 @@
 <script lang="ts">
     // @ts-ignore
     import {Release} from './_interfaces.ts';
+    import {fade} from 'svelte/transition';
     export let today;
     export let release: Release;
+    let visible = true;
     const cmp = 'release-detail';
 
     function imgurThumb(src: string): string {
@@ -26,22 +28,21 @@
 </script>
 
 {#if release}
-    <div class={cmp}>
+    <div class={cmp} transition:fade>
         {#if release.event}
             <div class="{cmp}__name">
                 {release.event.name}
-                {#if release.event.type}(type: {release.event.type}){/if}
-                {#if release.anniversary}Anniversary: #{release.anniversary}{/if}
+                {#if !!release.event.type}(type: {release.event.type}){/if}
             </div>
         {/if}
-        {#if release.fixfor}
+        {#if !!release.fixfor}
             <div class="{cmp}__fixfor">This is a fix for {release.fixfor}</div>
         {/if}
         <div class="{cmp}__meta">
             {release.version}
             from {release.date} (days ago: {countDaysAgo(release.date)})
         </div>
-        {#if release.notes}
+        {#if !!release.notes}
             <p class="{cmp}__notes">{release.notes}</p>
         {/if}
         <div class="{cmp}__links">{#if release.forum}
@@ -57,12 +58,15 @@
             <div class="{cmp}__img">
                 {#if Array.isArray(release.event.img)}
                     {#each release.event.img as img}
-                        <a href="{img}" target="_blank"><img src="{imgurThumb(img)}" alt=""/></a>
+                        <a href="{img}" target="_blank">
+                            <img class={img.loaded ? "is-loaded" : ""} on:load="{() => img.loaded = true}" src="{imgurThumb(img)}" alt=""/>
+                        </a>
                     {/each}
                 {:else}
                     {#if release.event.img}
-                        <a href="{release.event.img}" target="_blank"><img src="{imgurThumb(release.event.img)}"
-                                                                           alt=""/></a>
+                        <a href="{release.event.img}" target="_blank">
+                            <img class="is-loaded" src="{imgurThumb(release.event.img)}" alt=""/>
+                        </a>
                     {/if}
                 {/if}
             </div>

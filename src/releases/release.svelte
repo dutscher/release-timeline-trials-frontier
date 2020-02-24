@@ -12,6 +12,8 @@
     export let release;
     export let isFirst = false;
     export let isLast = false;
+    let iconLoaded = false;
+
     const bubble = tweened(0, {
         delay: 500,
     });
@@ -45,8 +47,9 @@
     <div class="{cmp}__content">
         {#if release.icon}
             <img
-                    class="{cmp}__icon"
+                    class="{cmp}__icon{iconLoaded ? ' is-loaded' : ''}"
                     src={release.icon}
+                    on:load="{() => iconLoaded = true}"
                     alt="{release.version} - {release.date}"/>
         {/if}
     </div>

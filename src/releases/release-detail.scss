@@ -27,6 +27,7 @@ $cmp: '.release-detail';
     a {
       margin-right: $base-size;
       display: inline-block;
+      color: $color-dark-grey;
     }
   }
 
@@ -35,12 +36,23 @@ $cmp: '.release-detail';
     padding-bottom: 0;
 
     a {
-      display: inline-block
+      display: inline-block;
     }
 
     img {
       width: 40px;
+      height: 40px;
+      background: $color-white;
       margin-right: $base-size--double;
+      border-radius: $base-size--double;
+      display: inline-block;
+      box-shadow: 0 0 5px 0 rgba($color-dark-grey, 0.5);
+      //opacity: 0;
+      transition: opacity 250ms linear;
+
+      &.is-loaded {
+        opacity: 1;
+      }
     }
   }
 }

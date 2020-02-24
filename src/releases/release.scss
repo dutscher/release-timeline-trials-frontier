@@ -3,6 +3,7 @@
 $cmp: '.release';
 #{$cmp} {
   color: $color-dark-grey;
+  transition: color 250ms ease-in-out;
   margin-right: $base-size--four;
   cursor: pointer;
   user-select: none;
@@ -70,8 +71,18 @@ $cmp: '.release';
     border-radius: $base-size--double;
     display: inline-block;
     box-shadow: 0 0 5px 0 rgba($color-dark-grey, 0.5);
+    background: $color-white;
     width: 120px;
     height: 120px;
+
+    img {
+      //opacity: 0;
+      transition: opacity 1000ms linear;
+
+      &.is-loaded {
+        opacity: 1;
+      }
+    }
   }
 
   // modifier

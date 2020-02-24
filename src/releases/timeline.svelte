@@ -1,11 +1,11 @@
-<style src="./releases.scss"></style>
+<style src="./timeline.scss"></style>
 
 <script>
     import {onMount, afterUpdate} from 'svelte';
     import Release from './release.svelte';
     import ReleaseDetail from './release-detail.svelte';
 
-    const cmp = 'releases';
+    const cmp = 'timeline';
     const today = new Date();
     let autoscroll = true;
     let slider;
@@ -85,7 +85,11 @@
     }
 
     function setActive(release, doAutoscroll) {
-        activeRelease = release;
+        activeRelease = null;
+        setTimeout(() => {
+            activeRelease = release;
+        }, 500);
+
         if (!doAutoscroll) {
             autoscroll = false;
         }
