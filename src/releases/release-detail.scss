@@ -27,7 +27,12 @@ $cmp: '.release-detail';
     a {
       margin-right: $base-size;
       display: inline-block;
-      color: $color-dark-grey;
+      color: $color-white;
+      text-decoration: underline;
+
+      &:hover {
+        color: $color-red;
+      }
     }
   }
 

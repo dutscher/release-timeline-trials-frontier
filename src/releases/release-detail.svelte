@@ -4,8 +4,11 @@
     // @ts-ignore
     import {Release} from './_interfaces.ts';
     import {fade} from 'svelte/transition';
+    import {toLocaleDate, getSplittedLocaleDate} from '../utils.js';
+
     export let today;
     export let release: Release;
+
     let visible = true;
     const cmp = 'release-detail';
 
@@ -16,11 +19,8 @@
         return src.replace('.' + fileExt, 's.' + fileExt);
     }
 
-    function countDaysAgo(date: string): number {
-        // data: 22.02.2020
-        // today: new Date()
-        const parts = date.split('.').map(int => parseInt(int));
-        const releaseDate = new Date(parts[2], parts[1] - 1, parts[0]);
+    function countDaysAgo(germanDate: string): number {
+        const releaseDate = getSplittedLocaleDate(germanDate);
         const diffTime = today.getTime() - releaseDate.getTime();
         const diffDays = diffTime / (1000 * 3600 * 24);
         return Math.round(diffDays);
@@ -40,7 +40,7 @@
         {/if}
         <div class="{cmp}__meta">
             {release.version}
-            from {release.date} (days ago: {countDaysAgo(release.date)})
+            from {toLocaleDate(release.date)} (days ago: {countDaysAgo(release.date)})
         </div>
         {#if !!release.notes}
             <p class="{cmp}__notes">{release.notes}</p>
@@ -59,13 +59,13 @@
                 {#if Array.isArray(release.event.img)}
                     {#each release.event.img as img}
                         <a href="{img}" target="_blank">
-                            <img class={img.loaded ? "is-loaded" : ""} on:load="{() => img.loaded = true}" src="{imgurThumb(img)}" alt=""/>
+                            <img class={img.loaded ? "is-loaded" : ""} src="{imgurThumb(img)}" alt=""/>
                         </a>
                     {/each}
                 {:else}
                     {#if release.event.img}
                         <a href="{release.event.img}" target="_blank">
-                            <img class="is-loaded" src="{imgurThumb(release.event.img)}" alt=""/>
+                            <img src="{imgurThumb(release.event.img)}" alt=""/>
                         </a>
                     {/if}
                 {/if}

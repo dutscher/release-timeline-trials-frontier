@@ -4,6 +4,7 @@
     import {onMount, afterUpdate} from 'svelte';
     import Release from './release.svelte';
     import ReleaseDetail from './release-detail.svelte';
+    import {localeDateWithPad} from '../utils.js';
 
     const cmp = 'timeline';
     const today = new Date();
@@ -14,7 +15,9 @@
     let showReleases = 1;
     let showNextReleaseInDetail = false;
     let timeout = null;
+    let activeTimeout = null;
     let activeRelease = null;
+
     // reactive
     $: {
         visibileReleases = allReleases.slice(0, showReleases);
@@ -66,6 +69,7 @@
 
     function showAll() {
         showReleases = allReleases.length;
+        setActive(allReleases[allReleases.length - 1], true);
     }
 
     function scrollHorizontal(event) {
@@ -86,13 +90,21 @@
 
     function setActive(release, doAutoscroll) {
         activeRelease = null;
-        setTimeout(() => {
-            activeRelease = release;
-        }, 500);
 
         if (!doAutoscroll) {
             autoscroll = false;
         }
+
+        if (activeTimeout !== null) {
+            clearTimeout(activeTimeout);
+        }
+
+        activeTimeout = setTimeout(() => {
+            activeRelease = release;
+            if (!doAutoscroll) {
+                autoscroll = false;
+            }
+        }, 500);
     }
 
     // misc
@@ -103,21 +115,12 @@
     function isLast(index) {
         return index === visibileReleases.length - 1;
     }
-
-    function hrDate(timestamp) {
-        // 2.2.2020 -> 02.02.2020
-        return timestamp
-                .toLocaleDateString()
-                .split('.')
-                .map(number => number.padStart(2, '0'))
-                .join('.')
-    }
 </script>
 
 <div class={cmp} bind:this={slider} on:mousewheel={scrollHorizontal}>
     <div class="{cmp}__welcome">
         <h1>Trials Frontier Releases</h1>
-        Today is the {hrDate(today)}
+        Today is the {localeDateWithPad(today)}
     </div>
     <div class="{cmp}__slider">
         {#each visibileReleases as release, i (release.version)}
